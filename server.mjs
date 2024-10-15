@@ -15,6 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 // Set up the view engine to render EJS files
 app.set("view engine", "ejs");
 
+// using the cwd- current working direction
 app.set("views", path.join(process.cwd(), "views"));
 
 app.use(express.static(path.join(process.cwd(), "public")));
