@@ -1,13 +1,18 @@
 import express from "express";
+// For managing file paths
 import path from "path";
+// Sneaker routes
 import sneakerRoutes from "./routes/sneakerRoutes.mjs";
 
+// Setting up the express app
 const app = express();
 const PORT = 3000;
 
+// Middleware for parsing incoming data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Set up the view engine to render EJS files
 app.set("view engine", "ejs");
 
 app.set("views", path.join(process.cwd(), "views"));

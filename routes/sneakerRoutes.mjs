@@ -37,6 +37,7 @@ router.post("/new", (req, res) => {
   }
 });
 
+//displaying the sneakers
 router.get("/", (req, res) => {
   const options = {
     allSneakers: sneakers,
@@ -45,6 +46,9 @@ router.get("/", (req, res) => {
   res.render("showAllSneakers", options);
 });
 
+// read, update and deleye by id
+
+//showing the specific sneaker by id
 router.get("/:id", (req, res) => {
   const sneaker = sneakers.find((s) => s.id == req.params.id);
 
@@ -54,19 +58,21 @@ router.get("/:id", (req, res) => {
     res.status(404).send("Sneaker not found!");
   }
 });
-
+// update the sneaker details from a patch req
 router.patch("/:id", (req, res) => {
   const sneaker = sneakers.find((s) => s.id == req.params.id);
 
   if (sneaker) {
     const { name, brand, price, releaseDate, description } = req.body;
 
+    //updating the fieleds provided
     if (name) sneaker.name = name;
     if (brand) sneaker.brand = brand;
     if (price) sneaker.price = parseFloat(price);
     if (releaseDate) sneaker.releaseDate = releaseDate;
     if (description) sneaker.description = description;
 
+    // sending back the updated sneaker
     res.json(sneaker);
   } else {
     res.status(404).send("Sneaker not found!");
@@ -80,6 +86,7 @@ router.delete("/:id", (req, res) => {
     const deletedSneaker = sneakers.splice(sneakerIndex, 1);
     res.json(deletedSneaker); // Send back the deleted sneaker
   } else {
+    // throwing the error
     res.status(404).send("Sneaker not found!");
   }
 });
